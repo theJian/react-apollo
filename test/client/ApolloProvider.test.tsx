@@ -6,6 +6,7 @@ import ApolloClient from 'apollo-client';
 import { InMemoryCache as Cache } from 'apollo-cache-inmemory';
 import { ApolloLink } from 'apollo-link';
 import { ApolloProvider } from '../../src';
+import { isContextProvider } from 'react-is';
 
 describe('<ApolloProvider /> Component', () => {
   const client = new ApolloClient({
@@ -196,4 +197,8 @@ describe('<ApolloProvider /> Component', () => {
     expect(child.context.client).toEqual(newClient);
     expect(child.context.client).not.toEqual(client);
   });
+
+  it('should be identified as context provider', () => {
+    expect(isContextProvider(ApolloProvider)).toBe(true);
+  })
 });

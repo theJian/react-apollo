@@ -4,6 +4,7 @@ import { InMemoryCache as Cache } from 'apollo-cache-inmemory';
 import { ApolloLink } from 'apollo-link';
 import { ApolloProvider, ApolloConsumer } from '../../src';
 import { mount } from 'enzyme';
+import { isContextConsumer } from 'react-is';
 
 const client = new ApolloClient({
   cache: new Cache(),
@@ -50,5 +51,9 @@ describe('<ApolloConsumer /> component', () => {
     );
 
     console.error = errorLogger;
+  });
+
+  it('should be identified as context consumer', () => {
+    expect(isContextConsumer(ApolloConsumer)).toBe(true);
   });
 });
